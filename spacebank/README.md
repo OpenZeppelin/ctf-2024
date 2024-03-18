@@ -61,4 +61,4 @@ For the first alarm, we need to provide data that, when decoded into a `uint256`
 
 Going back to the `explodeSpaceBank` function, we pass the first check, but now face the second and third checks. Specifically, the second check verifies that the `CREATE2`-created contract has no code (i.e. has self-destructed). Then, the third check verifies that the `SpaceBank` doesn't hold any tokens. This is achieved by executing a flash loan for the total amount of tokens available, followed by a withdrawal of these tokens, leaving the bank's coffers empty
 
-By implementing these steps, we can successfully destroy the bank and solve the challenge. You can check the solve script [here](challenge/project/script/Solve.sol).
+By implementing these steps, we can successfully destroy the bank and solve the challenge. You can check the solve script [here](challenge/project/script/Solve.s.sol).
