@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: alienspaceship
+  annotations:
+    type: PWN
+    name: Alien Spaceship
+    description: "You have hacked into an alien spaceship and stolen the bytecode that controls their spaceship. They are on a mission to attack your home planet. Luckily for you their spaceship runs on the EVM. Take over control of their spaceship and successfully `abortMission`."
+    author: "steventhornton"
+    tags: "pwn"
+    flag: "OZCTF{Th1s_miSs10n_d3S3rv3s_1tS_0Wn_M0v13}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

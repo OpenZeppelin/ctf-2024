@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: wombocombo
+  annotations:
+    type: PWN
+    name: Wombo Combo
+    description: "You should stake your tokens to get more tokens!"
+    author: "cairoeth"
+    tags: "pwn"
+    flag: "OZCTF{M3t4_Tr4NS4ct10nS_aR4_n0T_S0_m3Ta}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

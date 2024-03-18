@@ -1,0 +1,9 @@
+[
+  "error Failed(address)",
+  "error InsufficientBalance(address)",
+  "error InvalidNonceValue(address)",
+  "error ZeroBytecodeLength(address)",
+  "event ContractCreation(address)",
+  "function computeAddress(address,uint256) view returns (address)",
+  "function deploy(uint256,bytes) returns (address)"
+]

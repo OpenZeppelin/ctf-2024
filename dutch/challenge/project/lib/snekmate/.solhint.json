@@ -1,0 +1,9 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "func-name-mixedcase": "off",
+    "private-vars-leading-underscore": "off",
+    "one-contract-per-file": "off"
+  }
+}

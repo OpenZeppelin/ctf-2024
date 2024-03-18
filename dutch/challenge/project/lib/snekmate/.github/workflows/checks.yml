@@ -1,0 +1,108 @@
+name: 👮‍♂️ Sanity checks
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  prettify-n-lint:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        architecture:
+          - x64
+        python-version:
+          - 3.11
+        node_version:
+          - 18
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Restore Yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install Yarn project with a clean slate
+        run: yarn install --prefer-offline --frozen-lockfile
+
+      - name: Prettier and lint
+        run: yarn lint:check
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: ${{ matrix.architecture }}
+
+      - name: Check formatting with Black
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./scripts"
+
+  codespell:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run codespell
+        uses: codespell-project/actions-codespell@v2.0
+        with:
+          check_filenames: true
+          skip: ./.git,yarn.lock
+
+  validate-links:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        ruby-version:
+          - 3.2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: Install awesome_bot
+        run: gem install awesome_bot
+
+      - name: Validate URLs
+        run: |
+          awesome_bot ./*.md src/**/*.vy src/**/interfaces/*.vy \
+          test/**/*.sol test/**/interfaces/*.sol test/**/mocks/*.sol \
+          test/**/scripts/*.js scripts/*.py --allow-dupe --allow-redirect \
+          --request-delay 0.4 \
+          --white-list https://www.wagmi.xyz,https://twitter.com/0xDACA/status/1669846430528286722,https://github.com/pcaversaccio/snekmate/releases/tag/v0.0.4,https://github.com/pcaversaccio/snekmate/blob/v0.0.4,https://github.com/pcaversaccio/snekmate/compare/v0.0.3...v0.0.4

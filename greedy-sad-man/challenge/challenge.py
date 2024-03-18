@@ -1,0 +1,3 @@
+from ctf_launchers.starknet_pwn_launcher import StarknetPwnChallengeLauncher
+
+StarknetPwnChallengeLauncher().run()

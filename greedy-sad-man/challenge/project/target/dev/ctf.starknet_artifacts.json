@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"cun4mqk518scu","package_name":"ctf","contract_name":"GreedySadMan","module_path":"ctf::greedy_sad_man::GreedySadMan","artifacts":{"sierra":"ctf_GreedySadMan.contract_class.json","casm":"ctf_GreedySadMan.compiled_contract_class.json"}}]}

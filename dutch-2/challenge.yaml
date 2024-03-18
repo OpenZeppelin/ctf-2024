@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: dutch2
+  annotations:
+    type: PWN
+    name: Dutch 2
+    description: "Looks like someone is auctioning a lot of tokens, but they are encrypted. Might be a good idea to bid..."
+    author: "cairoeth"
+    tags: "pwn"
+    flag: "OZCTF{sT4T3_g0T_T0o_C0nFuS3D_f0R_tH3_4uCt10n}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

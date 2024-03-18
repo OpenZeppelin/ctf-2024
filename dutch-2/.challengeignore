@@ -1,0 +1,8 @@
+challenge/project/broadcast/*
+challenge/project/cache/*
+challenge/project/out/*
+
+
+challenge/solve.py
+challenge/project/script/Solve.s.sol
+challenge/project/test/Challenge.t.sol

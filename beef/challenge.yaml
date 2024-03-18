@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: beef
+  annotations:
+    type: PWN
+    name: beef
+    description: "My favorite project airdropped some tokens, but I didn't get any. Can you help me burn all of the supply? >:)"
+    author: "cairoeth"
+    tags: "pwn"
+    flag: "OZCTF{Th0S3_ADdR3sS3S_d1dNt_l0Ok_c0ol_eN0uGh}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

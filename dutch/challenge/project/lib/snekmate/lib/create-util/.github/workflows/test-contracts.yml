@@ -1,0 +1,46 @@
+name: 🕵️‍♂️ Test smart contracts
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        node_version:
+          - 18
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install npm project with a clean slate
+        run: npm ci --prefer-offline
+
+      - name: Hardhat tests
+        run: npm run test
+
+      - name: Slither static analyser
+        uses: crytic/slither-action@v0.3.0
+        continue-on-error: true
+        with:
+          node-version: ${{ matrix.node_version }}

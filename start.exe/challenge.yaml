@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: start
+  annotations:
+    type: PWN
+    name: start.exe
+    description: "This transaction seems to be the start of something big. Can you figure out what it is? https://sepolia.etherscan.io/tx/0x73fcb6eec33280c39a696b8db0f7b3f71f789c28ef722e0c716f9c8cef6aa040"
+    author: "cairoeth"
+    tags: "pwn"
+    flag: "OZCTF{0N3_G14NT_L3AP_F0R_M4NK1ND}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

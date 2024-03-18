@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: greedysadman
+  annotations:
+    type: PWN
+    name: Greedy Sad Man
+    description: "A very greedy and sad man is accepting donations in order to reduce his sadness. Everyone deserves happiness. Will you be able to make him happy?"
+    author: "ericnordelo"
+    tags: "pwn"
+    flag: "OZCTF{n0T_f34rful_Wh3N_0th3rS_4r3_gr33dy}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

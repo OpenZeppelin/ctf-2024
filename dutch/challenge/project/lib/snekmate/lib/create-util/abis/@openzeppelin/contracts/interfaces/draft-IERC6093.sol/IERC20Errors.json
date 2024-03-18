@@ -1,0 +1,8 @@
+[
+  "error ERC20InsufficientAllowance(address,uint256,uint256)",
+  "error ERC20InsufficientBalance(address,uint256,uint256)",
+  "error ERC20InvalidApprover(address)",
+  "error ERC20InvalidReceiver(address)",
+  "error ERC20InvalidSender(address)",
+  "error ERC20InvalidSpender(address)"
+]

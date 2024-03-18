@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: dutch
+  annotations:
+    type: PWN
+    name: Dutch
+    description: "Dutch auctions are great for NFTs. Can you become the highest bidder?"
+    author: "cairoeth"
+    tags: "pwn"
+    flag: "OZCTF{y0U_D1dNt_H4v3_P3rm1sS10n_F0r_tH4T_:(}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

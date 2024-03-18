@@ -1,0 +1,9 @@
+[
+  "error ERC1155InsufficientBalance(address,uint256,uint256,uint256)",
+  "error ERC1155InvalidApprover(address)",
+  "error ERC1155InvalidArrayLength(uint256,uint256)",
+  "error ERC1155InvalidOperator(address)",
+  "error ERC1155InvalidReceiver(address)",
+  "error ERC1155InvalidSender(address)",
+  "error ERC1155MissingApprovalForAll(address,address)"
+]

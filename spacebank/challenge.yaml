@@ -1,0 +1,18 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: spacebank
+  annotations:
+    type: PWN
+    name: Space Bank
+    description: "The formidable Space Bank is known for its stringent security systems and vast reserves of space tokens (Galactic credits). Outsmart two state-of-the-art alarms, steal the tokens, and then detonate the bank to claim victory."
+    author: "pedroais2"
+    tags: "pwn"
+    flag: "OZCTF{J4m3s_B0nd_tYp3_0f_3xPl01t}"
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+  healthcheck:
+    enabled: false

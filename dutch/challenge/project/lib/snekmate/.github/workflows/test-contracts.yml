@@ -1,0 +1,93 @@
+name: 🕵️‍♂️ Test smart contracts
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        architecture:
+          - x64
+        python-version:
+          - 3.11
+        node_version:
+          - 18
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: ${{ matrix.architecture }}
+
+      - name: Install Vyper
+        run: pip install vyper
+
+      - name: Check userdoc and devdoc compilation
+        run: python scripts/compile.py
+
+      - name: Setup Ape
+        uses: ApeWorX/github-action@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Check Ape compilation
+        run: ape compile
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Restore Yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install Yarn project with a clean slate
+        run: yarn install --prefer-offline --frozen-lockfile
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Show the Foundry CI config
+        run: forge config
+        env:
+          FOUNDRY_PROFILE: ci
+
+      - name: Foundry tests
+        run: forge test
+        env:
+          FOUNDRY_PROFILE: ci
+
+      - name: Show the Foundry default config
+        run: forge config
+        env:
+          FOUNDRY_PROFILE: default
+
+      - name: Run snapshot
+        run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY
+        env:
+          FOUNDRY_PROFILE: default

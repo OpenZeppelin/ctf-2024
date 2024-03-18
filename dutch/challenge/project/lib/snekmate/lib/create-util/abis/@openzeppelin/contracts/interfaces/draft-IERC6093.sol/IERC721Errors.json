@@ -1,0 +1,10 @@
+[
+  "error ERC721IncorrectOwner(address,uint256,address)",
+  "error ERC721InsufficientApproval(address,uint256)",
+  "error ERC721InvalidApprover(address)",
+  "error ERC721InvalidOperator(address)",
+  "error ERC721InvalidOwner(address)",
+  "error ERC721InvalidReceiver(address)",
+  "error ERC721InvalidSender(address)",
+  "error ERC721NonexistentToken(uint256)"
+]
