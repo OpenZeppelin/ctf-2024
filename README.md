@@ -48,7 +48,7 @@ Looks like someone is auctioning a lot of tokens, but they are encrypted. Might 
 [Solution](dutch-2/README.md) and [solve script](dutch-2/challenge/project/script/Solve.s.sol)
 
 ## Greedy Sad Man
-by ericnordelo / 428 points / 21 solves
+by [ericnordelo](https://twitter.com/ericng39) / 428 points / 21 solves
 
 **Description**:
 
